@@ -1,64 +1,45 @@
-
-function checkLogin(password ) {
+/**
+ * checkLogin function to validate user input .
+ * Returns Boolean TRUE if the username and the password match with the known username and matching password.
+ * @param {string} namevalue
+ * @param {string} passwordvalue
+ */
+function checkLogin(namevalue, passwordvalue) {
     "use strict";
-    var username = "Madiha";//set value of correct number
-    var userpassword = "123";
-    var newpass = md5Encrypt(userpassword);
-   // console.log(newpass);
-    console.log(userpassword);
-    console.log(newpass);
-    var argumrntpwd =  md5Encrypt(password);
-    console.log(argumrntpwd);
-     var bool = false;
-    if (  newpass === argumrntpwd  ) {
-        console.log(" if else working");
-        bool = true;
-        return "guess again";
-}
-console.log(" function working");
+    var username = "Madiha";
+    var userpassword = "123";//secret password
 
- return "thats it";
-}
+    var md5name = md5Encrypt(username);
+    var md5password = md5Encrypt(userpassword);
 
+    var name = md5Encrypt(namevalue);
+    var password = md5Encrypt(passwordvalue);
 
-
-
-
-
-
-//Lab 4 Testing With Jasmine
-/*function checkLogin(name,pwd) {
-    "use strict";
-    var username = name;//set value of correct number
-    var userpassword = pwd;*/
-
-//Output messages
-  /*  var returnMessage = "";
-    var noNumber = "A number was not input.";
-    var noInput = "A value was not entered.";
-    var outOfRange = "Way off! Pick between 1 and 10.";
-    var correct = "You guessed it!";
-    var validIncorrect = "Guess again.";
-
-//Validate input and assign a return message
-    if (isNaN(guess) === true) {
-        returnMessage = noNumber;
-        
-    } else if (guess === "") {
-        returnMessage = noInput;
-        
-    } else if (guess <= 1 || guess >= 10) {
-        returnMessage = outOfRange;
-        
-    } 
-    else {
-        if ( name === username && pwd === userpassword) {
-            returnMessage = correct;
-        } 
-        else {
-            returnMessage = validIncorrect;
-        }
+    var returnmsg = '';
+    if (namevalue === '' && passwordvalue === '' ) {
+        returnmsg = 'No username and password entered.';
     }
-
-    return returnMessage;
-}*/
+    else if (namevalue === '' ) {
+        returnmsg = 'No username entered.';
+    }
+    else if (passwordvalue === '' ) {
+        returnmsg = 'No password entered.';
+    }
+    else  if (md5name === name &&  md5password === password) {
+        returnmsg = true;
+    }
+    else if (md5name !== name &&  md5password === password) {
+        returnmsg = 'Invalid Username or Password';
+    }
+    else if (md5name === name &&  md5password !== password) {
+        returnmsg = 'Invalid Username or Password';
+    }
+    else if(md5name !== name && md5password !== password) {
+        returnmsg = 'Invalid Username or Password';
+    }
+    return returnmsg;
+    /* Line 29 till 37 can be replaced with a single statement!
+    else{
+        returnmsg = 'Invalid Username or Password';
+    }*/
+}//END checkLogin Function
